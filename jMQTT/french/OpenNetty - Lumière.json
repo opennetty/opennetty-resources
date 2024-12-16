@@ -1,0 +1,118 @@
+{
+  "OpenNetty - Lumière": {
+    "eqType_name": "jMQTT",
+    "generic_type": "Light",
+
+    "configuration": {
+      "type": "eqpt",
+      "auto_add_cmd": "0",
+      "auto_add_topic": "%s/#",
+      "icone": "lightbulb",
+      "Qos": "1",
+      "battery_type": "Secteur",
+      "battery::disable": "1"
+    },
+
+    "category": {
+      "light": "1"
+    },
+  
+    "commands": [
+      {
+        "name": "État",
+        "eqType": "jMQTT",
+        "generic_type": "LIGHT_STATE",
+        "type": "info",
+        "subType": "binary",
+        "isVisible": 1,
+        "isHistorized": "0",
+        "order": 0,
+
+        "configuration": {
+          "topic": "%s/switch_state",
+          "jsonPath": "",
+          "repeatEventManagement": "never"
+        },
+
+        "template": {
+          "dashboard": "core::light",
+          "mobile": "core::light"
+        },
+
+        "display": {
+          "showNameOndashboard": "1",
+          "showNameOnmobile": "1"
+        }
+      },
+      {
+        "name": "Allumer",
+        "eqType": "jMQTT",
+        "generic_type": "LIGHT_ON",
+        "type": "action",
+        "subType": "other",
+        "value": "État",
+        "isVisible": 1,
+        "order": 1,
+
+        "configuration": {
+          "topic": "%s/switch_state/set",
+          "request": "ON"
+        },
+
+        "template": {
+          "dashboard": "core::default",
+          "mobile": "core::default"
+        },
+
+        "display": {
+          "showNameOndashboard": "1",
+          "showNameOnmobile": "1"
+        }
+      },
+      {
+        "name": "Éteindre",
+        "eqType": "jMQTT",
+        "generic_type": "LIGHT_OFF",
+        "type": "action",
+        "subType": "other",
+        "value": "État",
+        "isVisible": 1,
+        "order": 2,
+
+        "configuration": {
+          "topic": "%s/switch_state/set",
+          "request": "OFF"
+        },
+
+        "template": {
+          "dashboard": "core::default",
+          "mobile": "core::default"
+        },
+
+        "display": {
+          "showNameOndashboard": "1",
+          "showNameOnmobile": "1"
+        }
+      },
+      {
+        "name": "Récupérer état",
+        "eqType": "jMQTT",
+        "type": "action",
+        "subType": "other",
+        "value": "État",
+        "isVisible": 1,
+        "order": 3,
+
+        "configuration": {
+          "topic": "%s/switch_state/get",
+          "request": ""
+        },
+
+        "template": {
+          "dashboard": "core::default",
+          "mobile": "core::default"
+        }
+      }
+    ]
+  }
+}

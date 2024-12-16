@@ -1,0 +1,220 @@
+{
+  "OpenNetty - Gestionnaire énergie": {
+    "eqType_name": "jMQTT",
+    "generic_type": "Heating",
+
+    "configuration": {
+      "type": "eqpt",
+      "auto_add_cmd": "0",
+      "auto_add_topic": "%s/#",
+      "icone": "chauffage",
+      "Qos": "1",
+      "battery_type": "Secteur",
+      "battery::disable": "1"
+    },
+
+    "category": {
+      "heating": "1"
+    },
+  
+    "commands": [
+      {
+        "name": "Index heures pleines",
+        "eqType": "jMQTT",
+        "type": "info",
+        "subType": "numeric",
+        "unite": "kWh",
+        "isHistorized": "1",
+        "isVisible": 1,
+        "order": 0,
+
+        "configuration": {
+          "topic": "%s/chauffage/smart_meter_indexes",
+          "jsonPath": "[base_index]",
+          "minValue": "0"
+        },
+
+        "template": {
+          "dashboard": "core::default",
+          "mobile": "core::default"
+        }
+      },
+      {
+        "name": "Index heures creuses",
+        "eqType": "jMQTT",
+        "type": "info",
+        "subType": "numeric",
+        "unite": "kWh",
+        "isHistorized": "1",
+        "isVisible": 1,
+        "order": 1,
+
+        "configuration": {
+          "topic": "%s/chauffage/smart_meter_indexes",
+          "jsonPath": "[off_peak_index]",
+          "minValue": "0"
+        },
+
+        "template": {
+          "dashboard": "core::default",
+          "mobile": "core::default"
+        }
+      },
+      {
+        "name": "Tarif en cours",
+        "eqType": "jMQTT",
+        "type": "info",
+        "subType": "string",
+        "isHistorized": "1",
+        "isVisible": 1,
+        "order": 2,
+
+        "configuration": {
+          "topic": "%s/chauffage/rate_type",
+          "jsonPath": "",
+          "calculValueOffset": "#value# == \"off_peak\" ? \"Heures creuses\" : \"Heures pleines\""
+        },
+
+        "template": {
+          "dashboard": "core::default",
+          "mobile": "core::default"
+        }
+      },
+      {
+        "name": "Mode ECS programmé",
+        "eqType": "jMQTT",
+        "type": "info",
+        "subType": "string",
+        "isHistorized": "0",
+        "isVisible": 0,
+        "order": 3,
+
+        "configuration": {
+          "topic": "%s/eau chaude sanitaire/water_heater_setpoint_mode",
+          "jsonPath": ""
+        },
+
+        "template": {
+          "dashboard": "core::default",
+          "mobile": "core::default"
+        }
+      },
+      {
+        "name": "Chauffe ECS en cours",
+        "eqType": "jMQTT",
+        "type": "info",
+        "subType": "binary",
+        "isHistorized": "0",
+        "isVisible": 1,
+        "order": 4,
+
+        "configuration": {
+          "topic": "%s/eau chaude sanitaire/water_heater_state",
+          "jsonPath": "",
+          "calculValueOffset": "#value# == \"heating\""
+        },
+
+        "template": {
+          "dashboard": "core::default",
+          "mobile": "core::default"
+        }
+      },
+      {
+        "name": "Délestage en cours",
+        "eqType": "jMQTT",
+        "type": "info",
+        "subType": "binary",
+        "isHistorized": "0",
+        "isVisible": 1,
+        "order": 4,
+
+        "configuration": {
+          "topic": "%s/chauffage/is_power_cut_active",
+          "jsonPath": ""
+        },
+
+        "template": {
+          "dashboard": "core::default",
+          "mobile": "core::default"
+        }
+      },
+      {
+        "name": "Mode ECS",
+        "eqType": "jMQTT",
+        "type": "action",
+        "subType": "select",
+        "value": "Mode ECS programmé",
+        "isVisible": 1,
+        "order": 5,
+
+        "configuration": {
+          "topic": "%s/eau chaude sanitaire/water_heater_setpoint_mode/set",
+          "request": "#select#",
+          "listValue": "automatic|Automatique;forced_off|Arrêt forcé;forced_on|Marche forcée"
+        },
+
+        "template": {
+          "dashboard": "core::default",
+          "mobile": "core::default"
+        }
+      },
+      {
+        "name": "Récupérer index de consommation",
+        "eqType": "jMQTT",
+        "type": "action",
+        "subType": "other",
+        "value": "Index heures pleines",
+        "isVisible": 1,
+        "order": 6,
+
+        "configuration": {
+          "topic": "%s/chauffage/smart_meter_indexes/get",
+          "request": ""
+        },
+
+        "template": {
+          "dashboard": "core::default",
+          "mobile": "core::default"
+        }
+      },
+      {
+        "name": "Récupérer tarif et état délestage",
+        "eqType": "jMQTT",
+        "type": "action",
+        "subType": "other",
+        "value": "Tarif en cours",
+        "isVisible": 1,
+        "order": 7,
+
+        "configuration": {
+          "topic": "%s/chauffage/rate_type/get",
+          "request": ""
+        },
+
+        "template": {
+          "dashboard": "core::default",
+          "mobile": "core::default"
+        }
+      },
+      {
+        "name": "Récupérer état ECS",
+        "eqType": "jMQTT",
+        "type": "action",
+        "subType": "other",
+        "value": "Chauffe ECS en cours",
+        "isVisible": 1,
+        "order": 8,
+
+        "configuration": {
+          "topic": "%s/eau chaude sanitaire/water_heater_state/get",
+          "request": ""
+        },
+
+        "template": {
+          "dashboard": "core::default",
+          "mobile": "core::default"
+        }
+      }
+    ]
+  }
+}

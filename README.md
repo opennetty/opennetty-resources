@@ -20,6 +20,16 @@ For more information on how to deploy these binaries, read [the documentation in
 
 --------------
 
+## Templates for Jeedom's jMQTT plugin
+
+JSON templates for Jeedom's [jMQTT plugin](https://market.jeedom.com/index.php?v=d&p=market_display&id=3166) can be found in the
+[jMQTT](jMQTT/) folder and can be used to quickly create light (dimmable or not), pilot wire or smart meter equipments in Jeedom.
+
+> [!NOTE]
+> Support for additional languages or devices will be progressively added depending on the demand.
+
+--------------
+
 ## Security policy
 
 Security issues and bugs should be reported privately by emailing contact@kevinchalet.com.

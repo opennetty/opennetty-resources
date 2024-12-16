@@ -1,0 +1,132 @@
+{
+  "OpenNetty - Commande de chauffage fil pilote": {
+    "eqType_name": "jMQTT",
+    "generic_type": "Heating",
+
+    "configuration": {
+      "type": "eqpt",
+      "auto_add_cmd": "0",
+      "auto_add_topic": "%s/#",
+      "icone": "chauffage",
+      "Qos": "1",
+      "battery_type": "Secteur",
+      "battery::disable": "1"
+    },
+
+    "category": {
+      "heating": "1"
+    },
+  
+    "commands": [
+      {
+        "name": "Consigne programmée",
+        "eqType": "jMQTT",
+        "type": "info",
+        "subType": "string",
+        "isVisible": 0,
+        "isHistorized": "0",
+        "order": 0,
+
+        "configuration": {
+          "topic": "%s/pilot_wire_setpoint_mode",
+          "jsonPath": "",
+          "repeatEventManagement": "never"
+        },
+
+        "template": {
+          "dashboard": "core::default",
+          "mobile": "core::default"
+        },
+
+        "display": {
+          "showNameOndashboard": "1",
+          "showNameOnmobile": "1"
+        }
+      },
+      {
+        "name": "Mode de dérogation programmé",
+        "eqType": "jMQTT",
+        "type": "info",
+        "subType": "string",
+        "isVisible": 0,
+        "isHistorized": "0",
+        "order": 1,
+
+        "configuration": {
+          "topic": "%s/pilot_wire_derogation_mode",
+          "jsonPath": "",
+          "repeatEventManagement": "never"
+        },
+
+        "template": {
+          "dashboard": "core::default",
+          "mobile": "core::default"
+        },
+
+        "display": {
+          "showNameOndashboard": "1",
+          "showNameOnmobile": "1"
+        }
+      },
+      {
+        "name": "Consigne",
+        "eqType": "jMQTT",
+        "type": "action",
+        "subType": "select",
+        "value": "Consigne programmée",
+        "isVisible": 1,
+        "order": 2,
+
+        "configuration": {
+          "topic": "%s/pilot_wire_setpoint_mode/set",
+          "request": "#select#",
+          "listValue": "comfort|Confort;comfort-1|Confort-1°C;comfort-2|Confort-2°C;eco|Éco;frost_protection|Hors-gel"
+        },
+
+        "template": {
+            "dashboard": "core::default",
+            "mobile": "core::default"
+        }
+      },
+      {
+        "name": "Dérogation",
+        "eqType": "jMQTT",
+        "type": "action",
+        "subType": "select",
+        "value": "Mode de dérogation programmé",
+        "isVisible": 1,
+        "order": 3,
+
+        "configuration": {
+          "topic": "%s/pilot_wire_derogation_mode/set",
+          "request": "#select#",
+          "listValue": "none|Aucune;comfort|Confort, jusqu'au prochain changement de consigne;comfort:4h|Confort, pendant au moins 4 heures;comfort:8h|Confort, pendant au moins 8 heures;comfort-1|Confort-1°C, jusqu'au prochain changement de consigne;comfort-1:4h|Confort-1°C, pendant au moins 4 heures;comfort-1:8h|Confort-1°C, pendant au moins 8 heures;comfort-2|Confort-2°C, jusqu'au prochain changement de consigne;comfort-2:4h|Confort-2°C, pendant au moins 4 heures;comfort-2:8h|Confort-2°C, pendant au moins 8 heures;eco|Éco, jusqu'au prochain changement de consigne;eco:4h|Éco, pendant au moins 4 heures;eco:8h|Éco, pendant au moins 8 heures;frost_protection|Hors-gel (permanent);frost_protection:4h|Hors-gel, pendant au moins 4 heures;frost_protection:8h|Hors-gel, pendant au moins 8 heures"
+        },
+
+        "template": {
+            "dashboard": "core::default",
+            "mobile": "core::default"
+        }
+      },
+      {
+        "name": "Récupérer état",
+        "eqType": "jMQTT",
+        "type": "action",
+        "subType": "other",
+        "value": "Consigne programmée",
+        "isVisible": 1,
+        "order": 4,
+
+        "configuration": {
+          "topic": "%s/pilot_wire_derogation_mode/get",
+          "request": ""
+        },
+
+        "template": {
+          "dashboard": "core::default",
+          "mobile": "core::default"
+        }
+      }
+    ]
+  }
+}
