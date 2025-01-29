@@ -8,7 +8,7 @@
       "auto_add_cmd": "0",
       "auto_add_topic": "%s/#",
       "icone": "chauffage",
-      "Qos": "1",
+      "Qos": "2",
       "battery_type": "Secteur",
       "battery::disable": "1"
     },
